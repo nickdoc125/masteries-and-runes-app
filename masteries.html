@@ -1,0 +1,1362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Masteries</title>
+        <style type="text/css">
+body {
+    background-color: #000;
+    margin: 0; /* Αφαίρεσε το default margin */
+    padding: 0; /* Αφαίρεσε το default padding */
+}
+
+#s2masteries {
+    background: url(images/content_tile.jpg) repeat-y;
+    background-color: #EFE0AA;
+    font: 11px Arial, Helvetica, sans-serif;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+     width: 1204px;
+    height: 900px;
+    padding: 40px;
+    position: relative;
+}
+
+#masteryTitle {
+    top: 50px;
+    text-align: left;
+    font-size: 40px;
+    font-weight: bold;
+    position: relative;
+}
+#panel {
+    top: 100px;
+    width: 920px;
+    height: 80px;
+    position: relative;
+    cursor: default;
+}
+
+#calculator {
+    background: url(images/masteries-background.jpg);
+    width: 920px;
+    height: 533px;
+    position: relative;
+    top: 125px;
+}
+
+.art-top {
+    width: 100%;
+    height: 195px;
+    background: url(images/content_top.png);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.art-bottom {
+    width: 100%;
+    height: 150px;
+    background: url(images/content_bot.jpg);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* --- Panel ---------------------------------------------------------------- */
+#points {
+    font-size: 18px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+#exportLink {
+    font-size: 18px;
+    margin-right: 0px;
+    color: #000;
+}
+.left {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.center {
+    text-align: center;
+    margin: 0 auto 15px;
+    position: relative;
+    top: 0; 
+}
+.right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+button {
+    cursor: pointer;
+    width: 130px;
+    padding: 3px;
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    border: 1px outset #3467A7;
+    border-radius: 4px;
+    background-color: #0F325B;
+    font-family: Arial, Helvetica, sans-serif;
+}
+button:hover {
+    background: -moz-linear-gradient(top, rgba(86,121,165,1) 1%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(86,121,165,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* IE10+ */
+    background: linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5679a5', endColorstr='#0e2848',GradientType=0 ); /* IE6-9 */
+}
+button,
+button:active {
+    background: -moz-linear-gradient(top, rgba(52,103,167,1) 0%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,103,167,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* IE10+ */
+    background: linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3467a7', endColorstr='#0e2848',GradientType=0 ); /* IE6-9 */
+}
+button:active {
+    border-style: inset;
+}
+
+#masteryKeyInput {
+    width: 400px;
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+    
+}
+
+/* Profiles Styles */
+.profiles-section {
+    position: absolute;
+    top: 290px;
+    right: 50px;
+    background: rgba(239, 224, 170, 0.95);
+    border: 2px solid #d4b654;
+    border-radius: 8px;
+    height: 530px;
+    width: 270px;
+    z-index: 1000;
+}
+
+#profilesList {
+    max-height: 430px; /* ή όσο ύψος θες */
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 10px;
+}
+
+/* Προαιρετικά: στυλ για το scrollbar */
+#profilesList::-webkit-scrollbar {
+    width: 8px;
+}
+
+#profilesList::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#profilesList::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#profilesList::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.profiles-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-item {
+    background: -moz-linear-gradient(top, rgba(52,103,167,1) 0%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,103,167,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+    background: -webkit-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -o-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -ms-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3467a7', endColorstr='#0e2848',GradientType=0 );
+    color: white;
+    border: 1px outset #3467A7;
+    border-radius: 0;
+    padding: 6px 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    min-height: 20px;
+}
+
+.profile-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.profile-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-bottom: 0;
+}
+
+.profile-item:hover {
+    background: -moz-linear-gradient(top, rgba(86,121,165,1) 1%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(86,121,165,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+    background: -webkit-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -o-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -ms-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5679a5', endColorstr='#0e2848',GradientType=0 );
+}
+
+.profile-item:active {
+    border-style: inset;
+}
+
+.profile-item.current-profile {
+    border: 1px solid #3467A7;
+    background: #0F325B;
+}
+
+.profile-item.current-profile:hover {
+    background: #1a4785;
+}
+
+.profile-name {
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.profile-delete-btn {
+    background: #983232;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-delete-btn:hover {
+    background: #b33b3b;
+}
+
+.profile-save-section {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    gap: 5px;
+}
+
+.profile-save-input {
+    flex-grow: 1;
+    padding: 5px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profile-save-btn {
+    background: -moz-linear-gradient(top, rgba(52,103,167,1) 0%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,103,167,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+    background: -webkit-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -o-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -ms-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3467a7', endColorstr='#0e2848',GradientType=0 );
+    color: white;
+    border: 1px outset #3467A7;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+}
+
+.profile-save-btn:hover {
+    background: -moz-linear-gradient(top, rgba(86,121,165,1) 1%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(86,121,165,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+    background: -webkit-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -o-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: -ms-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    background: linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5679a5', endColorstr='#0e2848',GradientType=0 );
+}
+
+.profile-save-btn:active {
+    border-style: inset;
+}
+
+#tree-summaries {
+    height: 40px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 4px;
+}
+.tree-summary {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    background-image: url(images/tree-icons.png);
+}
+#tree-summaries .offense {
+    background-position: 0px 0px;
+}
+#tree-summaries .defense {
+    background-position: 0px -43px;
+}
+#tree-summaries .utility {
+    background-position: 0px -86px;
+}
+
+
+/* --- Calculator ----------------------------------------------------------- */
+.tree-label {
+    color: #fefefe;
+    position: absolute;
+    font-weight: bolder;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.button {
+    width: 54px;
+    height: 54px;
+    position: absolute;
+    cursor: pointer;
+    border: 2px solid #999;
+    border-radius: 8px;
+    z-index: 1;
+    background-image: url(settings/button-icons.png);
+}
+
+.button.unavailable {
+    border-color: #999;
+    cursor: default;
+}
+.button.available {
+    border-color: #00ff00;
+}
+.button.full {
+    border-color: #d4b654;
+}
+
+#tooltip {
+    display: none;
+    color: #fefefe;
+    width: 180px;
+    padding: 5px;
+    background: #000;
+    position: absolute;
+    z-index: 100;
+    border: 2px solid #323635;
+    border-radius: 5px;
+}
+#tooltip strong {
+    font-size: 13px;
+    font-weight: bolder;
+}
+#tooltip p {
+    margin-bottom: 0px;
+}
+#tooltip .highlight {
+    color: #fecb00;
+}
+#tooltip .req {
+    color: #ff0000;
+}
+#tooltip.custom {
+    width: auto;
+}
+#tooltip.custom p {
+    margin-top: 0px;
+}
+
+.counter {
+    position: absolute;
+    right: 2px;
+    bottom: -7px;
+    background-color: #000;
+    border: 2px solid #d4b654;
+    border-radius: 5px;
+    font-size: 11px;
+    padding: 0px 5px;
+}
+
+.num-unavailable {
+    color: #999;
+}
+.num-available {
+    color: #00ff00;
+}
+.num-full {
+    color: #d4b654;
+}
+
+.requirement {
+    width: 21px;
+    position: absolute;
+    background: url(images/req-bars.png);
+}
+.requirement.unavailable {
+    background-position: 0px 0px;
+}
+.requirement.available {
+    background-position: -21px 0px;
+}
+.requirement.full {
+    background-position: -42px 0px;
+}
+
+#tooltip .offense {
+    color: #983200;
+}
+#tooltip .defense {
+    color: #46a3ee;
+}
+#tooltip .utility {
+    color: #329832;
+}
+        </style>
+        <script type="type/javascript">
+            // Preload sprites
+            (new Image()).src = "settings/button-icons.png";
+            (new Image()).src = "images/req-bars.png";
+            (new Image()).src = "images/tree-icons.png";
+        </script>
+    </head>
+    <body>
+        <div id="s2masteries">
+            <div class="art-top"></div>
+            <div class="art-bottom"></div>
+		<!-- Προσθήκη τίτλου -->
+    <div id="masteryTitle">Masteries</div>
+            <!-- Profiles Section - Always Visible -->
+            <div class="profiles-section" id="profilesSection">
+                <div class="profiles-header"></div>
+		<div class="profiles-header">Mastery Pages</div>
+                <div id="profilesList"></div>
+                <div class="profile-save-section">
+                    <input type="text" id="profileNameInput" class="profile-save-input" placeholder="Page name">
+                    <button class="profile-save-btn" id="saveProfileBtn">Save</button>
+                </div>
+            </div>
+            
+            <div id="panel">
+                <div class="left">
+                    <div id="points">
+                        <span>Points Available: </span><span class="count"></span>
+                    </div>
+                </div>
+                <div class="center">
+                    <input type="text" id="masteryKeyInput" placeholder="id|points (e.g. 100|3,101|2,102|4)">
+                    <button id="copyKeyButton">Copy Key</button>
+                </div>
+                <div class="right">
+                    <button id="return">Return Points</button>
+                </div>
+                <div id="tree-summaries"></div>
+            </div>
+            <div id="calculator"></div>
+        </div>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+        <script type="text/javascript" src="settings/mastery_data.js"></script>
+        <script type="text/javascript">
+var treeNames = [
+    "offense",
+    "defense",
+    "utility",
+];
+var treeOffsets = [
+    0,
+    data[0].length,
+    data[0].length + data[1].length
+];
+var MAX_POINTS = 30;
+var TREE_OFFSET = 305;
+var HEIGHT_GAP = 26;
+var BUTTON_SIZE = 56;
+var state = [{}, {}, {}];
+var treePoints = [0, 0, 0];
+var totalPoints = 0;
+var buttonClasses = ["unavailable", "available", "full"];
+var rankClasses = ["num-unavailable", "num-available", "num-full"];
+var isUpdatingFromKey = false; // Flag για να αποφεύγουμε κυκλικές ενημερώσεις
+
+// Profiles System
+var profiles = JSON.parse(localStorage.getItem('masteryProfiles') || '{}');
+
+function drawCalculator() {
+    for (var tree = 0; tree < 3; tree++)
+        for (var index = 0; index < data[tree].length; index++)
+            drawButton(tree, index);
+
+    // make tooltip
+    var tip, maxDims = {width: $("#calculator").parent().width(), height: $("#calculator").parent().height()};
+    $("#calculator")
+        .contextmenu(function(event){ event.preventDefault() })
+        .append(
+            $("<div>")
+                .attr('id', "tooltip")
+                .append($("<strong>"))
+                .append(
+                    $("<div>")
+                        .addClass("rank")
+                )
+                .append(
+                    $("<div>")
+                        .addClass("req")
+                )
+                .append(
+                    $("<p>")
+                        .addClass("tooltip-text")
+                        .addClass("first")
+                )
+                .append(
+                    $("<p>")
+                        .addClass("tooltip-text")
+                        .addClass("second")
+                        .append(
+                            $("<div>")
+                                .addClass("nextRank")
+                                .text("Next rank:")
+                        )
+                        .append(
+                            $("<div>")
+                                .addClass("content")
+                        )
+                )
+        );
+
+    // mousemove event global since it follows tooltip visibility
+    var anchor = $("#calculator");
+    $(window)
+        .mousemove(function(event){
+            if (tip.is(":visible")) {
+                // boundary checking for tooltip (right and bottom sides)
+                var pos = anchor.offset();
+                var offsetX = 20, offsetY = 20;
+                if (event.pageX - pos.left + tip.width() > maxDims.width - 30)
+                    offsetX = -tip.width() - 20;
+                if (event.pageY - pos.top + tip.height() > maxDims.height )
+                    offsetY = -tip.height() - 20;
+                tip.css({
+                    left: event.pageX - pos.left + offsetX,
+                    top:  event.pageY - pos.top + offsetY,
+                });
+            }
+        });
+    tip = $("#tooltip");
+
+    $("#points>.count").text(MAX_POINTS);
+}
+
+function drawButton(tree, index) {
+    var spritePos = masterySpritePos(tree, index);
+    var buttonPos = masteryButtonPosition(tree, index);
+    var status = data[tree][index].index < 5 ? "available" : "unavailable";
+    var rank = 0;
+
+    // Check if we need to draw the requirement
+    var parent = data[tree][index].parent;
+    var parentLink = null;
+    if (parent != undefined) {
+        var parentPos = masteryButtonPosition(tree, parent);
+        $("#calculator").append(parentLink = 
+            $("<div>")
+                .addClass("requirement")
+                .addClass("unavailable")
+                // height is one gap and button for each in between them, plus an extra gap 
+                .css({
+                    height: (HEIGHT_GAP + BUTTON_SIZE) * 
+                            (data[tree][index].index/4 - data[tree][parent].index/4 - 1) + HEIGHT_GAP + 5,
+                    left: parentPos.x + 18,
+                    top: parentPos.y + BUTTON_SIZE - 2,
+                })
+        );
+    }
+
+    $("#calculator").append(
+        $("<div>")
+            .addClass("button")
+            .addClass(status)
+            .data("parentLink", parentLink)
+            .css({
+                left: buttonPos.x+"px",
+                top: buttonPos.y+"px",
+                // Sprite has two columns: 0px is color and -58px is black and white
+                backgroundPosition: (status != "unavailable" ? -2 : -60) + "px " + 
+                                    (spritePos - 2) + "px",
+            })
+            .append(
+                $("<div>")
+                    .addClass("counter")
+                    .addClass("num-"+status)
+                    .text("0/" + data[tree][index].ranks)
+            )
+            .mouseover(function(event){
+                var tooltipText = masteryTooltip(tree, index, rank);
+                formatTooltip($("#tooltip").show(), tooltipText);
+                $(this).data("hover", true);
+                $(this).parent().mousemove();
+            })
+            .mouseout(function(){
+                $("#tooltip").hide();
+                $(this).data("hover", false);
+            })
+            .mousedown(function(event){
+                switch (event.which) {
+                    case 1:
+                        // Left click
+                        if (isValidState(tree, index, rank, +1)) {
+                            setState(tree, index, rank, +1);
+                        }
+                        break;
+                    case 3:
+                        // Right click
+                        if (isValidState(tree, index, rank, -1)) {
+                            setState(tree, index, rank, -1);
+                        }
+                        break;
+                }
+            })
+            .data("update", function() {
+                rank = state[tree][index] || 0;
+                if (rank == data[tree][index].ranks) {
+                    status = "full";
+                } else {
+                    // check if available
+                    if (masteryPointReq(tree, index) <= treePoints[tree] && masteryParentReq(tree, index))
+                        status = "available";
+                    else
+                        status = "unavailable";
+
+                    // check if points spent
+                    if (totalPoints >= MAX_POINTS)
+                        if (rank > 0)
+                            status = "available";
+                        else
+                            status = "unavailable";
+                }
+                // change status class
+                if ( !$(this).hasClass(status) ) {
+                    $(this)
+                        .removeClass(buttonClasses.join(" "))
+                        .addClass(status)
+                        .css({
+                            backgroundPosition: (status != "unavailable" ? -2 : -60) + "px " + 
+                                                (spritePos - 2) + "px",
+                        });
+                }
+                // adjust counter
+                var counter = $(this).find(".counter").text(rank + "/" + data[tree][index].ranks);
+                if ( !counter.hasClass("num-"+status) ) {
+                    counter
+                        .removeClass(rankClasses.join(" "))
+                        .addClass("num-"+status)
+                }
+
+                // change parent status
+                var parentLink = $(this).data("parentLink");
+                if (parentLink != null) {
+                    if ( !parentLink.hasClass(status) ) {
+                        parentLink
+                            .removeClass(buttonClasses.join(" "))
+                            .addClass(status);
+                    }
+                }
+                // force tooltip redraw
+                if ($(this).data("hover"))
+                    $(this).mouseover();
+            })
+    );
+}
+
+function customTooltip(tooltip, tooltipText) {
+    tooltip.addClass("custom");
+    tooltip.children(":not(p.first)").hide();
+    tooltip.find("p.first").text(tooltipText);
+}
+
+function formatTooltip(tooltip, tooltipText) {
+    tooltip.removeClass("custom");
+
+    var head = tooltip.find("strong").text(tooltipText.header).show();
+    if ( !head.hasClass(treeNames[tooltipText.tree]) ) {
+        head
+            .removeClass(treeNames.join(" "))
+            .addClass(treeNames[tooltipText.tree]);
+    }
+
+    var rank = tooltip.find(".rank").text(tooltipText.rank).show();
+    if ( !rank.hasClass(tooltipText.rankClass) ) {
+        rank
+            .removeClass(rankClasses.join(" "))
+            .addClass(tooltipText.rankClass)
+    }
+
+    tooltip.find(".req").text(tooltipText.req).show();
+    tooltip.find("p.first").html(tooltipText.body);
+
+    var second = tooltip.find("p.second");
+    if (tooltipText.bodyNext == null) {
+        second.hide();
+    } else {
+        second
+            .show()
+            .find(".content")
+                .html(tooltipText.bodyNext);
+    }
+}
+
+function masteryTooltip(tree, index, rank) {
+    var mastery = data[tree][index];
+    // second flags whether there are two tooltips (one for next rank)
+    var showNext = !(rank < 1 || rank >= mastery.ranks);
+
+    // parse text
+    var text = {
+        tree: tree,
+        header: mastery.name,
+        rank: "Rank: " + rank + "/" + mastery.ranks,
+        rankClass: (rank < mastery.ranks ? rankClasses[1] : rankClasses[2]),
+        req: masteryTooltipReq(tree, index),
+        body: masteryTooltipBody(mastery, rank),
+        bodyNext: showNext ? masteryTooltipBody(mastery, rank+1) : null,
+    };
+
+    return text;
+}
+
+function masteryTooltipBody(mastery, rank)  {
+    // Rank 1 is index 0, but Rank 0 is also index 0
+    rank = Math.max(0, rank - 1);
+    var desc = mastery.desc;
+    // Replace ALL # occurrences with the value
+    desc = desc.replace(/#/g, mastery.rankInfo[rank]);
+    desc = desc.replace(/\n/g, "<br>");
+    desc = desc.replace(/\|(.+?)\|/g, "<span class='highlight'>$1</span>");
+    if (mastery.perlevel) {
+        desc = desc.replace(/#/g, Math.round(mastery.rankInfo[rank]*180)/10);
+    }
+    if (mastery.rankInfo2) {
+        desc = desc.replace(/#/g, mastery.rankInfo2[rank]);
+    }
+    return desc;
+}
+
+function masteryTooltipReq(tree, index) {
+    var missing = [];
+    var pointReq = masteryPointReq(tree, index)
+    if (pointReq > treePoints[tree])
+        missing.push("Requires " + pointReq + " points in " + treeNames[tree][0].toUpperCase() + treeNames[tree].slice(1));
+    if (!masteryParentReq(tree, index)) {
+        var parent = data[tree][index].parent;
+        missing.push("Requires " + data[tree][parent].ranks + " points in " + data[tree][parent].name);
+    }
+
+    return missing.join("\n");
+}
+
+function masteryButtonPosition(tree, index) {
+    var idx = data[tree][index].index - 1;
+    var ix = idx % 4;
+    var iy = Math.floor(idx / 4);
+    var x=0, y=0;
+
+    // padding for tree
+    x += TREE_OFFSET * tree;
+    // base padding
+    x += 20;
+    y += 18;
+    // padding for spacing
+    x += ix * (BUTTON_SIZE + 15);
+    y += iy * (BUTTON_SIZE + HEIGHT_GAP);
+
+    return {x: x, y: y};
+}
+
+function masterySpritePos(tree, index) {
+    return 0 - 58 * (treeOffsets[tree] + index);
+}
+
+function masteryPointReq(tree, index) {
+    return Math.floor((data[tree][index].index-1) / 4) * 4;
+}
+
+function masteryParentReq(tree, index) {
+    var parent = data[tree][index].parent;
+    if (parent && (state[tree][parent] || 0) < data[tree][parent].ranks)
+        return false;
+    return true;
+}
+
+
+function isValidState(tree, index, rank, mod) {
+    var mastery = data[tree][index];
+    if (rank+mod < 0 || rank+mod > mastery.ranks)
+        return false;
+
+    // Incrementing
+    if (mod > 0) {
+        // Check max points
+        if (totalPoints + mod > MAX_POINTS)
+            return false;
+
+        // Check this mastery's rank requirements: never account for current rank
+        if (masteryPointReq(tree, index) > treePoints[tree] - rank)
+            return false;
+
+        // Check this mastery's parent requirements
+        if (!masteryParentReq(tree, index))
+            return false;
+    }
+
+    // Decrementing
+    if (mod < 0) {
+        // Check tree rank requirements
+        for (var i in state[tree])
+            if (i != index)
+                // Figure out tier, multiply by 4 to get req points
+                if (state[tree][i] > 0 && 
+                    masteryPointReq(tree, i) > treePoints[tree] + mod - (state[tree][i] || 0))
+                    return false;
+
+        // Check child requirements
+        for (var i in state[tree])
+            if (i != index)
+                if (state[tree][i] > 0 && data[tree][i].parent == index)
+                    return false;
+    }
+
+    return true;
+}
+
+function setState(tree, index, rank, mod) {
+    state[tree][index] = rank + mod;
+    treePoints[tree] += mod;
+    totalPoints += mod;
+
+    updateButtons();
+    updateLabels();
+    if (!isUpdatingFromKey) {
+        updateKeyDisplay(); // Ενημέρωση του κλειδιού μόνο αν δεν προέρχεται από key input
+    }
+}
+
+// If quiet flag is true, does not call updates
+function resetStates(quiet) {
+    for (var tree=0; tree<3; tree++)
+        resetTree(tree);
+
+    if (quiet != true) {
+        updateButtons();
+        updateLabels();
+        if (!isUpdatingFromKey) {
+            updateKeyDisplay(); // Ενημέρωση του κλειδιού μόνο αν δεν προέρχεται από key input
+        }
+    }
+}
+
+// Used in both resetStates and via panel
+function resetTree(tree, update) {
+    totalPoints -= treePoints[tree];
+    treePoints[tree] = 0;
+    for (var index in state[tree])
+        state[tree][index] = 0;
+}
+
+function updateButtons() {
+    $("#calculator .button").each(function(){
+        $(this).data("update").call(this, 0);
+    });
+}
+
+function updateLabels() {
+    for (var tree=0; tree<3; tree++) {
+        $("div[data-idx="+tree+"]").text(treePoints[tree]);
+        $("#points>.count").text(MAX_POINTS - totalPoints);
+    }
+}
+
+// Νέα συνάρτηση για δημιουργία κλειδιού από τα τρέχοντα masteries
+function generateMasteryKey() {
+    var keyParts = [];
+    
+    for (var tree = 0; tree < 3; tree++) {
+        for (var index = 0; index < data[tree].length; index++) {
+            var points = state[tree][index] || 0;
+            if (points > 0) {
+                var masteryId = data[tree][index].id;
+                keyParts.push(masteryId + "|" + points);
+            }
+        }
+    }
+    
+    return keyParts.join(",");
+}
+
+// Νέα συνάρτηση για ενημέρωση της εμφάνισης του κλειδιού
+function updateKeyDisplay() {
+    var key = generateMasteryKey();
+    $("#masteryKeyInput").val(key);
+    updateCurrentProfileHighlight(); // Ενημέρωση highlight όταν αλλάζει το κλειδί
+}
+
+// Νέα συνάρτηση για εισαγωγή από μορφή id|points
+function importFromIdPoints(keyString) {
+    isUpdatingFromKey = true; // Ορίζουμε το flag για να αποφύγουμε κυκλικές ενημερώσεις
+    
+    resetStates(true);
+    
+    var pairs = keyString.split(',');
+    var totalImportedPoints = 0;
+    
+    for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].trim();
+        if (pair === '') continue;
+        
+        var parts = pair.split('|');
+        if (parts.length !== 2) {
+            console.log('Λάθος μορφή: ' + pair);
+            continue;
+        }
+        
+        var id = parseInt(parts[0].trim());
+        var points = parseInt(parts[1].trim());
+        
+        if (isNaN(id) || isNaN(points)) {
+            console.log('Λάθος αριθμός: ' + pair);
+            continue;
+        }
+        
+        // Βρες το mastery με το δοσμένο ID
+        var found = false;
+        for (var tree = 0; tree < 3; tree++) {
+            for (var index = 0; index < data[tree].length; index++) {
+                if (data[tree][index].id === id) {
+                    // Έλεγχος αν τα points είναι εντός των ορίων
+                    if (points >= 0 && points <= data[tree][index].ranks) {
+                        state[tree][index] = points;
+                        treePoints[tree] += points;
+                        totalPoints += points;
+                        totalImportedPoints += points;
+                        found = true;
+                    } else {
+                        console.log('Λάθος points για ID ' + id + ': ' + points);
+                    }
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        
+        if (!found) {
+            console.log('Δεν βρέθηκε mastery με ID: ' + id);
+        }
+    }
+    
+    // Έλεγχος αν ξεπερνούνται τα μέγιστα points
+    
+    
+    updateButtons();
+    updateLabels();
+    
+    console.log('Εισαγωγή ολοκληρώθηκε. Σύνολο points: ' + totalImportedPoints);
+    
+    isUpdatingFromKey = false; // Καταργούμε το flag
+    updateCurrentProfileHighlight(); // Ενημέρωση highlight μετά την εισαγωγή
+}
+
+// Profiles Functions
+function saveProfile() {
+    var profileName = $("#profileNameInput").val().trim();
+    if (!profileName) {
+        // Αντί για alert, απλά επιστροφή χωρίς μήνυμα
+        return;
+    }
+    
+    var key = generateMasteryKey();
+    profiles[profileName] = key;
+    localStorage.setItem('masteryProfiles', JSON.stringify(profiles));
+    
+    $("#profileNameInput").val("");
+    updateProfilesList();
+    // Αφαίρεση του alert()
+}
+
+function loadProfile(profileName) {
+    if (profiles[profileName]) {
+        // Ορίζουμε το flag για να αποφύγουμε κυκλικές ενημερώσεις
+        isUpdatingFromKey = true;
+        
+        // Πρώτα ορίζουμε το key στο πεδίο εισαγωγής
+        $("#masteryKeyInput").val(profiles[profileName]);
+        
+        // Μετά φορτώνουμε τα masteries από το key
+        importFromIdPoints(profiles[profileName]);
+        
+        // Καταργούμε το flag μετά από μικρή καθυστέρηση για να εξασφαλίσουμε ότι η εισαγωγή ολοκληρώθηκε
+        setTimeout(function() {
+            isUpdatingFromKey = false;
+        }, 100);
+    }
+}
+
+function deleteProfile(profileName) {
+    // Αφαίρεση του confirm() - απλά διαγραφή χωρίς επιβεβαίωση
+    delete profiles[profileName];
+    localStorage.setItem('masteryProfiles', JSON.stringify(profiles));
+    updateProfilesList();
+}
+
+// Νέα συνάρτηση για ενημέρωση του highlight των profiles
+function updateCurrentProfileHighlight() {
+    var currentKey = generateMasteryKey();
+    
+    // Αφαίρεση όλων των current-profile classes
+    $(".profile-item").removeClass("current-profile");
+    
+    // Εύρεση του profile που ταιριάζει με το τρέχον κλειδί
+    for (var profileName in profiles) {
+        if (profiles[profileName] === currentKey) {
+            // Προσθήκη class στο profile που ταιριάζει
+            $(".profile-item").each(function() {
+                if ($(this).find(".profile-name").text() === profileName) {
+                    $(this).addClass("current-profile");
+                }
+            });
+            break;
+        }
+    }
+}
+
+function updateProfilesList() {
+    var profilesList = $("#profilesList");
+    profilesList.empty();
+    
+    var profileNames = Object.keys(profiles).sort();
+    
+    if (profileNames.length === 0) {
+        profilesList.append('<div style="text-align: center; color: #666;">No pages saved</div>');
+        return;
+    }
+    
+    var currentKey = generateMasteryKey();
+    
+    profileNames.forEach(function(profileName) {
+        var profileItem = $('<div class="profile-item">');
+        
+        // Έλεγχος αν το profile ταιριάζει με το τρέχον κλειδί
+        if (profiles[profileName] === currentKey) {
+            profileItem.addClass("current-profile");
+        }
+        
+        profileItem.append('<span class="profile-name">' + profileName + '</span>');
+        
+        var actionsDiv = $('<div class="profile-actions">');
+        actionsDiv.append('<button class="profile-delete-btn" onclick="event.stopPropagation(); deleteProfile(\'' + profileName + '\')">×</button>');
+        
+        profileItem.append(actionsDiv);
+        profileItem.click(function() {
+            loadProfile(profileName);
+        });
+        profilesList.append(profileItem);
+    });
+}
+
+function updateLink() {
+    var hash = exportMasteries();
+    // Do not show link for empty trees
+    if (hash.length <= 3) hash = '';
+    hash = '#' + hash;
+
+    // Update link and url only if we have to
+    $("#exportLink").attr("href", document.location.origin + document.location.pathname + hash);
+    if (document.location.hash != hash) {
+        // Using replace() causes no change in browser history
+        document.location.replace(hash);
+        // Temporarily unbind change
+        $(window).unbind('hashchange');
+        setTimeout(function(){
+            $(window).bind('hashchange', updateMasteries);
+        }, 500);
+    }
+}
+
+// There are max 4 points per mastery, or 3 bits each. There is a 1 bit padding
+// that is a flag to determine whether the following 5 bits are a sequence of
+// mastery codes or an index increase. We greedily take masteries until the next
+// one would put us over capacity, at which point we flush the buffer. You will
+// always flush at the end of a tree.
+var maxbits = 5;
+var exportChars = "WvlgUCsA7pGZ3zSjakbP2x0mTB6htH8JuKMq1yrnwEQDLY5IVNXdcioe9fF4OR_-";
+var bitlen = function(tree, index) {
+    if (data[tree][index] == undefined)
+        return 0;
+    return Math.floor(data[tree][index].ranks/2)+1;
+}
+// returns how many of the next masteries can fit in size bits
+var bitfit = function(tree, index, bits) {
+    var start = index;
+    while (true) {
+        var len = bitlen(tree, index);
+        if (len > bits || len == 0)
+            return index - start;
+        bits -= len;
+        index++;
+    }
+}
+function exportMasteries() {
+    var str = "";
+    var bits = 0;
+    var collected = 0; // number of bits collected in this substr
+    var tree, jumpStart = -1; // jumpStart is the start of the index, which we can turn to a bool by comparing >-1
+    var flush = function() {
+        str += exportChars[(jumpStart>-1) << maxbits | bits];
+        bits = 0;
+        collected = 0;
+        jumpStart = -1;
+    }
+    for (tree = 0; tree < 3; tree++) {
+        for (var index = 0; index < data[tree].length; index++) {
+            var space = bitfit(tree, index, maxbits - collected);
+
+            // check if we should flush
+            if (space < 1) {
+                flush();
+                space = bitfit(tree, index, maxbits);
+            }
+
+            // if we are collecting or the condition is right for collecting:
+            // - if we are jumping and this is 0, SKIP. 
+            if (jumpStart > -1 && !(state[tree][index] > 0))
+                continue;
+            // otherwise:
+            // - either we were collecting already (and haven't flushed)
+            // - or we can collect any within the next subset that would fit in
+            //   this bit. we do this with some cool filter/map/reduce
+            if (collected > 0 || 
+                [0,1,2]
+                    .filter(function(a){ return a < space; })
+                    .map(function(a){ return state[tree][index+a] || 0; })
+                    .some(function(a){ return a > 0; })){
+                // check if we are at the end of a jump
+                if (jumpStart > -1) {
+                    bits = index - jumpStart;
+                    flush();
+                }
+                    
+                // collect more
+                var len = bitlen(tree, index);
+                bits = (bits << len) | (state[tree][index] || 0);
+                collected += len;
+            } else if(jumpStart < 0) {
+                // this is the start of a jump
+                // check for flush
+                if (collected > 0)
+                    flush();
+                jumpStart = index;
+            }
+        }
+        // before switching trees, flush unless we just did
+        if (jumpStart > -1) {
+            bits = index - jumpStart;
+            flush();
+        } else if (collected > 0) {
+            flush();
+        }
+    }
+
+    return str;
+}
+
+// Because we used a random string, we need to reverse it
+var importChars = {}
+for (var i=0; i<exportChars.length; i++) {
+    importChars[exportChars[i]] = i;
+}
+function importMasteries(str) {
+    resetStates(true);
+
+    var tree = 0;
+    var index = 0;
+    for (var i=0; i<str.length; i++) {
+        var cur = importChars[str[i]];
+        // check for bad input
+        if (cur == undefined) 
+            return;
+        // if the first bit is a 0, we know it's not a jump (using octal)
+        if ((cur & 040) == 0) {
+            // extract data
+            var num = bitfit(tree, index, maxbits); // how many we can fit
+            var sizes = [0, 1, 2] // an array of each mastery held in this char
+                            .filter(function(a){ return a < num; })
+                            .map(function(a){ return bitlen(tree, index+a); });
+            for (var j=0; j<sizes.length; j++, index++) {
+                // shift amount is the sum of all elements to the right of this one
+                var shift = sizes.slice(j + 1).reduce(function(a, b){ return a + b; }, 0);
+                // shift off the bits we don't want and AND it with a bit mask
+                var value = (cur >> shift) & ((1 << sizes[j]) - 1);
+
+                state[tree][index] = value;
+                treePoints[tree] += value;
+                totalPoints += value;
+            }
+        } else {
+            // jump
+            var dist = cur & 037;
+            index += dist;
+        }
+
+        // increment when we're done with a tree
+        if (index >= data[tree].length) {
+            tree++;
+            index = 0;
+            // break when we're done with all trees
+            if (tree >= data.length)
+                break;
+        }
+    }
+
+    updateButtons();
+    updateLabels();
+    updateKeyDisplay();
+}
+
+function updateMasteries() {
+    importMasteries(document.location.hash.slice(1));
+}
+
+// Νέα συνάρτηση για αντιγραφή του κλειδιού
+function copyMasteryKey() {
+    var keyInput = document.getElementById("masteryKeyInput");
+    keyInput.select();
+    keyInput.setSelectionRange(0, 99999); // For mobile devices
+    
+    try {
+        var successful = document.execCommand('copy');
+        if (successful) {
+        }
+    } catch (err) {
+        console.log('Αποτυχία αντιγραφής: ', err);
+    }
+}
+
+// Συνάρτηση για χειρισμό αλλαγών στο key input
+function handleKeyInputChange() {
+    if (isUpdatingFromKey) return; // Αν είμαστε σε λειτουργία ενημέρωσης από key, αγνόησε
+    
+    var key = $("#masteryKeyInput").val().trim();
+    if (key !== generateMasteryKey()) { // Μόνο αν το key είναι διαφορετικό από το τρέχον
+        importFromIdPoints(key);
+    }
+}
+
+$(function(){
+    // Calculator
+    drawCalculator();
+
+    // Panel
+    $("#return").click(resetStates);
+    
+    // Προσθήκη event listener για το κουμπί αντιγραφής
+    $("#copyKeyButton").click(copyMasteryKey);
+    
+    // Προσθήκη event listeners για το key input (και οι δύο τρόποι για καλύτερη απόκριση)
+    $("#masteryKeyInput").on('input', handleKeyInputChange);
+    $("#masteryKeyInput").on('change', handleKeyInputChange);
+    $("#masteryKeyInput").on('blur', handleKeyInputChange);
+    
+    // Profiles events
+    $("#saveProfileBtn").click(saveProfile);
+    
+    // Enter key για save profile
+    $("#profileNameInput").keypress(function(event) {
+        if (event.which == 13) { // Enter key
+            saveProfile();
+        }
+    });
+    
+    for (var tree = 0; tree < 3; tree++) {
+        $("#panel>#tree-summaries").append(
+            $("<div>")
+                .addClass("tree-summary")
+                .addClass(treeNames[tree])
+                .attr("data-idx", tree)
+                .text(0)
+                .css({
+                    left: TREE_OFFSET * tree + 126,
+                    cursor: "pointer",
+                })
+                .mouseover(function(){
+                    customTooltip($("#tooltip").show(), "Double click to reset tree");
+                })
+                .mouseout(function(){
+                    $("#tooltip").hide();
+                })
+                .dblclick(function(){
+                    resetTree($(this).attr("data-idx"), true);
+                    updateButtons();
+                    updateLabels();
+                    updateKeyDisplay();
+                })
+        )
+        .append(
+            $("<div>")
+        );
+    }
+
+    // Αρχικοποίηση του κλειδιού
+    updateKeyDisplay();
+
+    // Once set up, load if hash present
+    if (document.location.hash != "")
+        updateMasteries();
+
+    // Listen for hash changes
+    $(window).bind('hashchange', updateMasteries);
+    
+    // Initialize profiles list
+    updateProfilesList();
+});
+        </script>
+</body>
+</html>

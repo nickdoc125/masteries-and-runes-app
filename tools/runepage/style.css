@@ -1,0 +1,344 @@
+#app-container {
+  width: 1080px;
+  margin: 0 auto;
+  float: none; }
+
+#runepage-app {
+  width: 1080px;
+  height: 531px;
+  clear: both; }
+  #runepage-app h2 {
+    height: 35px;
+    width: 100%;
+    background: url(images/background_title.jpg) no-repeat left center;
+    background-color: #f0e2ae;
+    color: #71140f;
+    display: block;
+    margin: 0;
+    border-bottom: 1px solid #9d8035;
+    font-size: 26px;
+    line-height: 35px;
+    text-indent: 10px;
+    position: relative; }
+    #runepage-app h2 .align-right {
+      position: absolute;
+      right: 4px;
+      cursor: pointer; }
+    #runepage-app h2 .icon-cog {
+      top: 1px;
+      left: 2px;
+      position: relative; }
+    #runepage-app h2 .dropdown-menu i {
+      position: relative;
+      margin-left: -1.2em;
+      left: -.2em; }
+  #runepage-app > section {
+    border: 1px solid #9d8035;
+    height: 472px;
+    float: left;
+    margin-right: 4px; }
+
+#app-info {
+  width: 720px;
+  margin: 20px auto 0; }
+  #app-info .styled li {
+    text-indent: -2em;
+    padding-left: 2em;
+    line-height: 1.7em; }
+  #app-info .styled li span {
+    padding: 1px 3px;
+    border-radius: 3px;
+    background: #555;
+    font-weight: bold; }
+    #app-info .styled li span.unavailable {
+      color: #333;
+      background: #999; }
+    #app-info .styled li span.available {
+      color: #CCC; }
+    #app-info .styled li span.partial {
+      color: #393; }
+    #app-info .styled li span.complete {
+      color: #993; }
+
+#runepage-app #overview {
+  width: 1080px;
+  height: 42px;
+  display: block;
+  border: 0;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #CCC;
+  padding: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box; }
+  #runepage-app #overview .cost {
+    color: #666; }
+  #runepage-app #overview .total-cost {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    display: inline;
+    float: left; }
+  #runepage-app #overview .share-link {
+    line-height: 30px;
+    margin-right: 20px;
+    color: #666;
+    font-weight: bold; }
+
+.total-cost {
+  /*    font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      right: 25px;*/
+  position: relative; }
+  .total-cost:after {
+    content: ' ';
+    width: 16px;
+    height: 13px;
+    display: block;
+    background: url(images/ip_icon.png) no-repeat;
+    position: absolute;
+    right: -20px;
+    top: 8px; }
+
+#runes {
+  width: 225px;
+  background: #726644;
+  height: 472px; }
+  #runes h3 {
+    background-image: url(images/rune_header.png);
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    padding: 0 0 0 25px;
+    background-position: left top;
+    font-size: 16px;
+    cursor: pointer; }
+  #runes .rune-group-container {
+    overflow: auto;
+    height: 436px; }
+  #runes .rune-group {
+    overflow: hidden;
+    margin-bottom: 1px;
+    -moz-transition: max-height 0.5s ease-in-out;
+    -webkit-transition: max-height 0.5s ease-in-out;
+    -o-transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out; }
+    #runes .rune-group.collapsed {
+      max-height: 28px !important; }
+    #runes .rune-group.expanded {
+      height: auto;
+      margin-bottom: 0; }
+      #runes .rune-group.expanded h3 {
+        background-position: left bottom; }
+    #runes .rune-group.marks h3 {
+      color: #c80000; }
+    #runes .rune-group.seals h3 {
+      color: #cdcd00; }
+    #runes .rune-group.glyphs h3 {
+      color: #46a2ec; }
+    #runes .rune-group.quintessences h3 {
+      color: #9c50e7; }
+    #runes .rune-group.marks h3:hover {
+      color: #ffafaf; }
+    #runes .rune-group.seals h3:hover {
+      color: #ffffe6; }
+    #runes .rune-group.glyphs h3:hover {
+      color: #d1e8fa; }
+    #runes .rune-group.quintessences h3:hover {
+      color: #e8d7f9; }
+  #runes .rune {
+    height: 40px;
+    width: 221px;
+    margin: 2px auto;
+    border: 1px solid #9d8035;
+    background-color: #f1ead4;
+    background-image: -moz-linear-gradient(#f1ead4, #decd9c);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1ead4), to(#decd9c));
+    background-image: -webkit-linear-gradient(#f1ead4, #decd9c);
+    background-image: -o-linear-gradient(#f1ead4, #decd9c);
+    cursor: pointer;
+    position: relative;
+    display: block; }
+    #runes .rune .icon {
+      width: 32px;
+      height: 36px;
+      margin: 2px 10px 0 5px;
+      display: block;
+      float: left; }
+    #runes .rune.mark .icon {
+      background-image: url(images/mark_sprite_small.png); }
+    #runes .rune.seal .icon {
+      background-image: url(images/seal_sprite_small.png); }
+    #runes .rune.glyph .icon {
+      background-image: url(images/glyph_sprite_small.png); }
+    #runes .rune.quintessence .icon {
+      width: 36px;
+      background-image: url(images/quint_sprite_small.png); }
+    #runes .rune > .name {
+      height: 40px;
+      line-height: 40px;
+      font-weight: bold;
+      font-size: 12px; }
+    #runes .rune .quantity {
+      position: absolute;
+      bottom: 3px;
+      right: 4px;
+      height: 1em;
+      font-size: 12px;
+      line-height: 1em;
+      font-weight: bold;
+      color: #654; }
+      #runes .rune .quantity:before {
+        content: 'x';
+        margin-right: 1px; }
+    #runes .rune .rune-tooltip {
+      top: -18px;
+      right: auto;
+      left: 215px;
+      position: fixed !important; }
+    #runes .rune:hover .rune-tooltip {
+      display: block; }
+    #runes .rune > .cost {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      height: 1em;
+      font-size: 12px;
+      line-height: 1em;
+      font-weight: bold;
+      color: #654; }
+    #runes .rune > .cost:after {
+      content: ' IP'; }
+
+#runepage .runes {
+  width: 656px;
+  height: 436px;
+  background: url(images/background_runepage.jpg) no-repeat top left;
+  position: relative; }
+  #runepage .runes .rune {
+    position: absolute;
+    width: 49px;
+    height: 55px;
+    cursor: pointer;
+    display: none; }
+    #runepage .runes .rune.mark {
+      display: block;
+      background-image: url(images/mark_sprite.png); }
+    #runepage .runes .rune.seal {
+      display: block;
+      background-image: url(images/seal_sprite.png); }
+    #runepage .runes .rune.glyph {
+      display: block;
+      background-image: url(images/glyph_sprite.png); }
+    #runepage .runes .rune.quintessence {
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-image: url(images/quint_sprite.png); }
+    #runepage .runes .rune:hover .rune-tooltip {
+      display: block; }
+
+#statistics {
+  width: 184px;
+  margin-right: 0 !important;
+  background: #D9C688; }
+  #statistics .statistics {
+    overflow: auto;
+    height: 436px; }
+    #statistics .statistics .stat {
+      padding: 5px;
+      padding-bottom: 0;
+      margin: 5px 3px 0 3px;
+      display: block;
+      vertical-align: top; }
+      #statistics .statistics .stat .name {
+        font-weight: bold;
+        display: block; }
+      #statistics .statistics .stat.mark .name {
+        color: #c80000; }
+      #statistics .statistics .stat.seal .name {
+        color: #cdcd00; }
+      #statistics .statistics .stat.glyph .name {
+        color: #46a2ec; }
+      #statistics .statistics .stat.quint .name {
+        color: #9c50e7; }
+      #statistics .statistics .stat hr {
+        margin: 10px 10px 0 0;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #eee;
+        opacity: .7; }
+      #statistics .statistics .stat:last-child hr {
+        display: none; }
+
+.rune-tooltip {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  left: 54px;
+  background: #000;
+  border-radius: 5px;
+  border: 2px solid #666;
+  white-space: nowrap;
+  text-align: center;
+  padding: 2px 5px;
+  font-size: 12px;
+  z-index: 5; }
+  .rune-tooltip .tier {
+    float: left;
+    color: #f26900; }
+  .rune-tooltip .rank {
+    float: right; }
+  .rune-tooltip .name {
+    margin: 1.7em 3em 0;
+    clear: both;
+    font-size: 14px;
+    font-weight: bold; }
+  .rune-tooltip .description {
+    margin-bottom: 1em;
+    color: #fff; }
+  .mark .rune-tooltip {
+    top: -24px;
+    color: #c80000; }
+  .seal .rune-tooltip {
+    color: #cdcd00; }
+  .glyph .rune-tooltip {
+    left: auto;
+    right: 55px;
+    color: #46a2ec; }
+  .quintessence .rune-tooltip {
+    left: 105px;
+    top: 11px;
+    color: #9c50e7; }
+    .quintessence .rune-tooltip .rank {
+      display: none; }
+  .quintessence:last-child .rune-tooltip {
+    left: auto;
+    right: 100px; }
+  .rune-tooltip .cost {
+    color: #ddd;
+    bottom: 3px;
+    right: 5px;
+    position: absolute;
+    line-height: 1em; }
+  .rune-tooltip .cost:after {
+    content: ' IP'; }
+
+.mCSB_container {
+  margin-right: 0 !important; }
+
+#shareButton.zeroclipboard-is-hover {
+  color: #333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position .1s linear;
+  -moz-transition: background-position .1s linear;
+  -o-transition: background-position .1s linear;
+  transition: background-position .1s linear;
+  background-color: #E6E6E6; }
+#shareButton.zeroclipboard-is-active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); }

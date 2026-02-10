@@ -1,0 +1,114 @@
+/* == Common ==*/
+@font-face {
+  font-family: 'Sui Generis';
+  src: url("http://mullinator.com/fonts/suigeneris.ttf"); }
+body {
+  /*    background:#F2F2F2;
+      color:#545554;*/
+  font-family: Calibri, "Trebuchet MS", Arial, Helvetica, sans-serif;
+  padding: 0; }
+
+@media (min-width: 980px) {
+  body {
+    padding: 60px 0; } }
+div#wrapper {
+  display: block;
+  margin: 0px auto; }
+
+div.clear {
+  clear: both; }
+
+/* == Notice == */
+div.notice {
+  font-weight: bold;
+  color: #545554;
+  display: block;
+  margin: 40px auto 0;
+  text-align: center; }
+  div.notice h1 {
+    font-size: 24px;
+    margin: 0; }
+  div.notice h2 {
+    font-size: 20px; }
+  div.notice p {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 10px; }
+  div.notice#modern h2 {
+    margin-bottom: 40px; }
+
+label {
+  display: inline; }
+
+label, input, button, select, textarea {
+  font-size: 18px; }
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  color: #000;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 18px; }
+
+.container .credit {
+  line-height: normal; }
+
+.nav-tabs {
+  margin-bottom: 0; }
+  .nav-tabs li.active a, .nav-tabs li.active a:hover {
+    background: #fdfdfd; }
+
+.tab-content {
+  padding: 20px 20px;
+  background: #fdfdfd;
+  margin-bottom: -15px; }
+
+.accordion-group {
+  background: #fff; }
+
+.hero-unit h1 {
+  text-align: left; }
+
+header .donate-button {
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+  header .donate-button span {
+    margin-right: 5px;
+    float: left; }
+  header .donate-button form {
+    margin: 0; }
+
+.modals form {
+  display: inline-block;
+  margin: 0 0 0 5px; }
+.modals #modal-donation p {
+  font-size: 16px; }
+
+.btn-donate {
+  background: url(../../en_US/i/btn/btn_donate_SM.gif);
+  height: 21px;
+  width: 74px;
+  display: block; }
+
+.nav .coming-soon:after {
+  content: '[Coming Soon]';
+  color: #CCC;
+  font-size: 10px;
+  margin-left: 10px;
+  margin-right: -5px;
+  font-style: italic; }
+
+.alert-info a {
+  color: #0a6; }
+
+#app-info {
+  width: 600px;
+  margin: 40px auto; }
+
+ul.circle, ul.changelog {
+  list-style-type: circle; }
+
+.patch {
+  font-size: 16px;
+  color: #ccc; }

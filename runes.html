@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <base href=".">
+
+    <title>Runes</title>
+
+	<link rel="canonical" href="http://mullinator.com" />
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="tools/_css/reset.css" media="screen"/>
+
+    <link rel="stylesheet" type="text/css" href="tools/_css/bootstrap.min.css" media="screen"/>
+
+    <link rel="stylesheet" type="text/css" href="tools/_css/bootstrap-responsive.min.css" media="screen"/>
+
+    <link rel="stylesheet" type="text/css" href="tools/_css/style.css" media="screen"/>
+
+    <link rel="stylesheet" type="text/css" href="tools/runepage/style.css" media="screen"/>
+
+    <script src="tools/_js/jquery.min.js"></script>
+
+    <script src="tools/_js/bootstrap.min.js"></script>
+
+    <script src="tools/_js/global.js"></script>
+
+    <meta name="keywords" content="league of legends, lol, runes, runepages"/>
+
+<meta name="description" content="A calculator that illustrates the effect and cost of Runes"/>
+
+<link rel="stylesheet" type="text/css" href="tools/runepage/mScrollbar.css" media="screen"/>
+
+<script src="tools/_js/angular.min.js"></script>
+
+<script src="tools/runepage/js/jquery.mousewheel.min.js"></script>
+
+<script src="tools/runepage/js/jquery.mCustomScrollbar.min.js"></script>
+
+<script src="tools/_js/knockout.min.js"></script>
+
+<script src="tools/_js/knockout.mapping.min.js"></script>
+
+<script src="tools/_js/changelog.js"></script>
+
+<script src="tools/runepage/js/clipboard.min.js"></script>
+
+<script src="tools/runepage/js/common.js"></script>
+
+<script src="settings/runes.js"></script>
+
+<script src="tools/runepage/js/data.js"></script>
+
+<script type="text/javascript">
+
+    QueryVars = {
+
+        hash : ''
+
+    }
+
+</script>    <script src="tools/runepage/controller.js"></script>
+
+    <style type="text/css">
+
+          /* Βασικό styling όπως στο mastery calculator */
+
+    body {
+
+        background-color: #000;
+
+        margin: 0;
+
+        padding: 0;
+
+        min-height: 100vh;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    
+
+    /* Κύριο container με το ίδιο background */
+
+   #s2runes {
+    background: url(images/content_tile.jpg) repeat-y;
+    background-color: #EFE0AA;
+    width: 1204px;
+    height: 900px;
+    margin: 0; /* Αφαίρεση auto margin */
+    padding: 40px;
+    position: relative;
+    left: 0; /* Βεβαιώνουμε ότι είναι τερματικά αριστερά */
+}
+
+/* Προσαρμογή του art-top και art-bottom για να μείνουν σωστά τοποθετημένα */
+.art-top {
+    width: 100%;
+    height: 195px;
+    background: url(images/content_top.png);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.art-bottom {
+    width: 100%;
+    height: 150px;
+    background: url(images/content_bot.jpg);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* Προσαρμογή του app-container */
+#app-container {
+    top: 50px;
+    right: 0px;
+    position: relative;
+    width: 100%;
+}
+
+/* Βελτίωση responsive design για μικρότερες οθόνες */
+@media (max-width: 1284px) {
+    #s2runes {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        left: 0;
+    }
+}
+
+
+#statistics {
+    position: absolute;
+    top: 60vh;
+    left: 0vw;
+    width: 83.7vw;
+    height: 15vh;
+    max-width: 1500px;
+    max-height: 160px;
+    min-width: 200px;
+    min-height: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    border: 0px solid #d4b654;
+    z-index: 0;
+    transform-origin: top left;
+}
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 ΣΤΗΛΕΣ ΑΠΟ DEFAULT */
+    grid-auto-flow: row; /* ΓΕΜΙΣΜΑ ΠΡΩΤΑ ΤΗΝ ΠΡΩΤΗ ΓΡΑΜΜΗ */
+    gap: 8px;
+    max-height: calc(18vh - 60px);
+    height: calc(18vh - 60px);
+    min-height: 90px;
+    overflow-y: auto;
+    margin-top: 0px;
+    padding: 8px;
+    align-items: start;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    border: 1px solid rgba(212, 182, 84, 0.3);
+    border-radius: 6px;
+    min-height: 24px;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive columns */
+@media (min-width: 1600px) {
+    .statistics {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+    .statistics {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .statistics {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .statistics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+    .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 599px) {
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+    /* Βελτίωση του header */
+
+    h1 {
+
+        color: #000;
+
+        font-weight: bold;
+
+        font-size: 40px;
+
+        margin-bottom: 20px;
+
+        position: relative;
+
+    }
+
+
+
+    /* Τα υπόλοιπα styles παραμένουν όπως ήταν */
+
+    .container-fluid {
+
+        padding: 0;
+
+    }
+
+
+
+    .row-fluid {
+
+        margin: 0;
+
+    }
+
+
+
+    .span12 {
+
+        width: 100%;
+
+    }
+
+
+
+    /* Profiles Styles - Ακριβώς όπως στα masteries */
+
+    .profiles-section {
+
+        position: absolute;
+
+        top: 215px;
+
+        right: 45px;
+
+        background: rgba(239, 224, 170, 0.95);
+
+        border: 2px solid #d4b654;
+
+        border-radius: 8px;
+
+        height: 429px;
+
+        width: 275px;
+
+        z-index: 1000;
+
+        padding: 15px;
+
+    }
+
+
+
+    #profilesList {
+
+        max-height: 430px;
+
+        overflow-y: auto;
+
+        overflow-x: hidden;
+
+        margin-bottom: 10px;
+
+    }
+
+
+
+    /* Προαιρετικά: στυλ για το scrollbar */
+
+    #profilesList::-webkit-scrollbar {
+
+        width: 8px;
+
+    }
+
+
+
+    #profilesList::-webkit-scrollbar-track {
+
+        background: #f1f1f1;
+
+        border-radius: 4px;
+
+    }
+
+
+
+    #profilesList::-webkit-scrollbar-thumb {
+
+        background: #888;
+
+        border-radius: 4px;
+
+    }
+
+
+
+    #profilesList::-webkit-scrollbar-thumb:hover {
+
+        background: #555;
+
+    }
+
+
+
+    .profiles-header {
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        margin-bottom: 10px;
+
+        text-align: center;
+
+        color: #333;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+
+
+    .profile-item {
+
+        background: -moz-linear-gradient(top, rgba(52,103,167,1) 0%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,103,167,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+
+        background: -webkit-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -o-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -ms-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3467a7', endColorstr='#0e2848',GradientType=0 );
+
+        color: white;
+
+        border: 1px outset #3467A7;
+
+        border-radius: 0;
+
+        padding: 6px 8px;
+
+        margin-bottom: 0;
+
+        cursor: pointer;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        font-size: 16px;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        text-align: center;
+
+        min-height: 20px;
+
+    }
+
+
+
+    .profile-item:first-child {
+
+        border-top-left-radius: 4px;
+
+        border-top-right-radius: 4px;
+
+    }
+
+
+
+    .profile-item:last-child {
+
+        border-bottom-left-radius: 4px;
+
+        border-bottom-right-radius: 4px;
+
+        margin-bottom: 0;
+
+    }
+
+
+
+    .profile-item:hover {
+
+        background: -moz-linear-gradient(top, rgba(86,121,165,1) 1%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(86,121,165,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+
+        background: -webkit-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -o-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -ms-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5679a5', endColorstr='#0e2848',GradientType=0 );
+
+    }
+
+
+
+    .profile-item:active {
+
+        border-style: inset;
+
+    }
+
+
+
+    .profile-item.current-profile {
+
+        border: 1px solid #3467A7;
+
+        background: #0F325B;
+
+    }
+
+
+
+    .profile-item.current-profile:hover {
+
+        background: #1a4785;
+
+    }
+
+
+
+    .profile-name {
+
+        flex-grow: 1;
+
+        font-weight: bold;
+
+    }
+
+
+
+    .profile-actions {
+
+        display: flex;
+
+        gap: 5px;
+
+    }
+
+
+
+    .profile-delete-btn {
+
+        background: #983232;
+
+        color: white;
+
+        border: none;
+
+        border-radius: 50%;
+
+        width: 20px;
+
+        height: 20px;
+
+        font-size: 12px;
+
+        font-weight: bold;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        cursor: pointer;
+
+        padding: 0;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+
+
+    .profile-delete-btn:hover {
+
+        background: #b33b3b;
+
+    }
+
+
+
+    .profile-save-section {
+
+        margin-top: 10px;
+
+        padding-top: 10px;
+
+        border-top: 1px solid #ccc;
+
+        display: flex;
+
+        gap: 5px;
+
+    }
+
+
+
+    .profile-save-input {
+
+        flex-grow: 1;
+
+        padding: 5px;
+
+        font-size: 14px;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+
+
+    .profile-save-btn {
+
+        background: -moz-linear-gradient(top, rgba(52,103,167,1) 0%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(52,103,167,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+
+        background: -webkit-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -o-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -ms-linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: linear-gradient(top, rgba(52,103,167,1) 0%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3467a7', endColorstr='#0e2848',GradientType=0 );
+
+        color: white;
+
+        border: 1px outset #3467A7;
+
+        border-radius: 4px;
+
+        padding: 5px 10px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        white-space: nowrap;
+
+    }
+
+
+
+    .profile-save-btn:hover {
+
+        background: -moz-linear-gradient(top, rgba(86,121,165,1) 1%, rgba(20,57,100,1) 50%, rgba(14,40,72,1) 100%);
+
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,rgba(86,121,165,1)), color-stop(50%,rgba(20,57,100,1)), color-stop(100%,rgba(14,40,72,1)));
+
+        background: -webkit-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -o-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: -ms-linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        background: linear-gradient(top, rgba(86,121,165,1) 1%,rgba(20,57,100,1) 50%,rgba(14,40,72,1) 100%);
+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5679a5', endColorstr='#0e2848',GradientType=0 );
+
+    }
+
+
+
+    .profile-save-btn:active {
+
+        border-style: inset;
+
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="s2runes">
+
+        <div class="art-top"></div>
+
+        <div class="art-bottom"></div>
+
+        
+
+        <!-- Profiles Section - Ακριβώς όπως στα masteries -->
+
+        <div class="profiles-section" id="profilesSection">
+
+            <div class="profiles-header">Rune Pages</div>
+
+            <div id="profilesList"></div>
+
+            <div class="profile-save-section">
+
+                <input type="text" id="profileNameInput" class="profile-save-input" placeholder="Page name">
+
+		<button class="profile-save-btn" id="saveProfileBtn">Save</button>
+
+            </div>
+
+        </div>
+
+        
+
+        <div id="app-container">
+
+            <article class="container-fluid">
+
+                <div class="row-fluid">
+
+                    <div class="span12">
+
+                        <h1 class="pull-left">Runes</h1>
+
+                        <section id="app">
+
+                            <section id="runepage-app" ng-app="RunepageApp">
+
+                                <section id="overview" ng-controller="Overview">
+
+                                    <div class="total-cost">Total Cost: <span class="cost">{{ formatCost() }}</span></div>
+
+                                    <button class="reset btn btn-danger pull-right" ng-click="reset()">Reset</button>
+
+                                    <div class="input-prepend input-append share-link" style="margin-left: 30px;">
+
+                                        <span class="add-on">Runes_ID</span>
+
+                                        <input class="span8" id="shareUrl" type="text" ng-model="url" style="width: 600px;"/>
+
+                                        <button class="btn btn-success" id="shareButton" type="button">Copy key</button>
+
+                                    </div>
+
+                                </section>
+
+                                
+
+                                <!-- Available Runes -->
+
+                                <section id="runes" ng-controller="Runes">
+
+                                    <h2 class="lol-header">Runes
+
+                                        <div class="btn-group align-right">
+
+                                            <button class="btn btn-small" data-toggle="dropdown">Settings <i class="icon-cog"></i></button>
+
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" ng-controller="Settings">
+
+                                                <li class="nav-header">Rune Types</li>
+
+                                                <li ng-repeat="setting in types" nge-click="toggle(event,setting)">
+
+                                                    <a tabindex="-1" href="#"> <i ng-show="setting.enabled == true" class="icon-ok"></i> {{setting.name}}</a>
+
+                                                </li>
+
+                                                <li class="divider"></li>
+
+                                                <li class="nav-header">Rune Tiers</li>
+
+                                                <li ng-repeat="setting in tiers" nge-click="toggle(event,setting)">
+
+                                                    <a tabindex="-1" href="#"> <i ng-show="setting.enabled == true" class="icon-ok"></i> {{setting.name}}</a>
+
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </h2>
+
+                                    <div class="rune-group-container custom-scroll">
+
+                                        <div class="rune-group {{group.name.toLowerCase()}} {{group.state}}" ng-repeat="group in groups">
+
+                                            <h3 nge-click="toggleGroup(event, group)">{{group.name}}</h3>
+
+                                            <div class="rune {{rune.type.toLowerCase()}}" ng-repeat="rune in group.runes" nge-click="onClick(event, rune)" ng-rclick="onClick(event, rune)" ng-show="rune.quantity > 0 &amp;&amp; rune.show == true">
+
+                                                <span class="icon" ng-style="formatStyle(rune)"></span>
+
+                                                <span class="name">{{ rune.stat.short }}</span>
+
+                                                <span class="cost">{{ rune.cost }}</span>
+
+                                                <span class="quantity">{{ rune.quantity }}</span>
+
+                                                <div class="rune-tooltip">
+
+                                                    <div class="tier">Tier {{rune.tier}}</div>
+
+                                                    <div class="rank">{{rune.rank}}</div>
+
+                                                    <div class="name">{{rune.name}}</div>
+
+                                                    <div class="description">{{rune.description}}</div>
+
+                                                    <span class="cost">{{ rune.cost }}</span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+                                
+
+                                <!-- Runepage -->
+
+                                <section id="runepage" ng-controller="Runepage">
+
+                                    <h2 class="lol-header">Runepage</h2>
+
+                                    <section class="runes">
+
+                                        <div class="rune" ng-repeat="rune in runes" ng-class="rune.type.toLowerCase()" ng-style="formatStyle(rune)" nge-click="onClick(event, rune)" ng-rclick="onClick(event, rune)">
+
+                                            <div class="rune-tooltip">
+
+                                                <div class="tier">Tier {{rune.tier}}</div>
+
+                                                <div class="rank">{{rune.rank}}</div>
+
+                                                <div class="name">{{rune.name}}</div>
+
+                                                <div class="description">{{rune.description}}</div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </section>
+
+                                </section>
+
+                                
+
+                                <!-- Statistics -->
+
+                                <section id="statistics" ng-controller="Statistics">
+
+                                    <h2 class="lol-header">Statistics</h2>
+
+                                    <section class="statistics custom-scroll">
+
+                                        <div class="stat" ng-repeat="stat in stats">
+
+                                            <span class="name"> {{stat.name}}</span>
+
+                                            <span class="value">{{stat.stringVal}}</span>
+
+                                           </div>
+
+                                    </section>
+
+                                </section>
+
+                            </section>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+    // Rune Profiles Manager - Two-Way Sync
+
+    class RuneProfilesManager {
+
+        constructor() {
+
+            this.profiles = JSON.parse(localStorage.getItem('runeProfiles') || '{}');
+
+            this.isUpdatingFromProfile = false;
+
+            this.currentKey = '';
+
+            this.init();
+
+        }
+
+
+
+        init() {
+
+            this.loadProfiles();
+
+            this.setupEventListeners();
+
+            this.startMonitoring();
+
+            console.log('Rune Profiles Manager initialized');
+
+        }
+
+
+
+        // 🔄 KEY MANAGEMENT
+
+        getCurrentKey() {
+
+            const shareUrlInput = document.getElementById('shareUrl');
+
+            return shareUrlInput ? shareUrlInput.value.trim() : '';
+
+        }
+
+
+
+        setCurrentKey(key) {
+
+            if (!key || this.isUpdatingFromProfile) return;
+
+            
+
+            this.isUpdatingFromProfile = true;
+
+            const shareUrlInput = document.getElementById('shareUrl');
+
+            
+
+            if (shareUrlInput && shareUrlInput.value !== key) {
+
+                shareUrlInput.value = key;
+
+                this.applyKeyToCalculator(key);
+
+            }
+
+            
+
+            setTimeout(() => {
+
+                this.isUpdatingFromProfile = false;
+
+                this.highlightCurrentProfile();
+
+            }, 1000);
+
+        }
+
+
+
+        applyKeyToCalculator(key) {
+
+            if (!key) return;
+
+
+
+            console.log('🔄 Applying key to calculator:', key);
+
+            
+
+            // Method 1: Use global function from controller.js
+
+            if (window.applyRuneKey && window.applyRuneKey(key)) {
+
+                console.log('✓ Key applied via global function');
+
+                return true;
+
+            }
+
+            
+
+            // Method 2: Direct Angular approach
+
+            try {
+
+                const runesElement = document.getElementById('runes');
+
+                if (runesElement) {
+
+                    const runesScope = angular.element(runesElement).scope();
+
+                    if (runesScope && typeof runesScope.fillRunes === 'function') {
+
+                        console.log('✓ Found Angular scope, applying runes...');
+
+                        
+
+                        runesScope.$apply(() => {
+
+                            runesScope.fillRunes(key);
+
+                        });
+
+                        
+
+                        console.log('✓ Runes applied successfully via Angular');
+
+                        return true;
+
+                    }
+
+                }
+
+            } catch (error) {
+
+                console.log('❌ Angular method failed:', error);
+
+            }
+
+
+
+            // Method 3: Use share button
+
+            try {
+
+                const shareButton = document.getElementById('shareButton');
+
+                if (shareButton) {
+
+                    console.log('✓ Trying share button method...');
+
+                    shareButton.click();
+
+                    console.log('✓ Share button triggered');
+
+                    return true;
+
+                }
+
+            } catch (error) {
+
+                console.log('❌ Share button method failed:', error);
+
+            }
+
+
+
+            console.log('❌ All methods failed to apply runes');
+
+            return false;
+
+        }
+
+
+
+        // 💾 PROFILES MANAGEMENT
+
+        saveProfile() {
+
+            const profileNameInput = document.getElementById('profileNameInput');
+
+            const profileName = profileNameInput.value.trim();
+
+
+
+            if (!profileName) {
+
+                alert('Το όνομα δεν μπορεί να είναι κενό');
+
+                return;
+
+            }
+
+            if (profileName.length > 16) {
+
+                alert('Μέγιστο όριο 16 χαρακτήρες');
+
+                return;
+
+            }
+
+            if (this.profiles[profileName]) {
+
+                alert('Το όνομα υπάρχει ήδη');
+
+                return;
+
+            }
+
+
+
+            const key = this.getCurrentKey();
+
+            if (!key) {
+
+                alert('Δεν υπάρχει rune setup για αποθήκευση');
+
+                return;
+
+            }
+
+
+
+            this.profiles[profileName] = key;
+
+            this.saveToStorage();
+
+            profileNameInput.value = '';
+
+            this.renderProfilesList();
+
+            
+
+            console.log('✓ Profile saved:', profileName, key);
+
+        }
+
+
+
+        loadProfile(profileName) {
+
+            if (this.profiles[profileName]) {
+
+                console.log('✓ Loading profile:', profileName);
+
+                this.setCurrentKey(this.profiles[profileName]);
+
+            }
+
+        }
+
+
+
+        deleteProfile(profileName, event) {
+
+            if (event) event.stopPropagation();
+
+            
+
+            if (confirm(`Διαγραφή του "${profileName}";`)) {
+
+                delete this.profiles[profileName];
+
+                this.saveToStorage();
+
+                this.renderProfilesList();
+
+                console.log('✓ Profile deleted:', profileName);
+
+            }
+
+        }
+
+
+
+        // 🎨 UI MANAGEMENT
+
+        renderProfilesList() {
+
+            const profilesList = document.getElementById('profilesList');
+
+            const profileNames = Object.keys(this.profiles).sort();
+
+
+
+            if (profileNames.length === 0) {
+
+                profilesList.innerHTML = '<div style="text-align: center; color: #666; padding: 10px;">No pages saved</div>';
+
+                return;
+
+            }
+
+
+
+            profilesList.innerHTML = profileNames.map(profileName => `
+
+                <div class="profile-item" data-profile="${profileName}">
+
+                    <span class="profile-name">${profileName}</span>
+
+                    <div class="profile-actions">
+
+                        <button class="profile-delete-btn" onclick="runeProfilesManager.deleteProfile('${profileName}', event)">×</button>
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+
+
+            profilesList.querySelectorAll('.profile-item').forEach(item => {
+
+                item.addEventListener('click', (e) => {
+
+                    if (!e.target.classList.contains('profile-delete-btn')) {
+
+                        this.loadProfile(item.dataset.profile);
+
+                    }
+
+                });
+
+            });
+
+
+
+            this.highlightCurrentProfile();
+
+        }
+
+
+
+        highlightCurrentProfile() {
+
+            const currentKey = this.getCurrentKey();
+
+            const profileItems = document.querySelectorAll('.profile-item');
+
+            
+
+            profileItems.forEach(item => {
+
+                item.classList.remove('current-profile');
+
+            });
+
+
+
+            for (const [profileName, profileKey] of Object.entries(this.profiles)) {
+
+                if (profileKey === currentKey) {
+
+                    const matchingItem = document.querySelector(`[data-profile="${profileName}"]`);
+
+                    if (matchingItem) {
+
+                        matchingItem.classList.add('current-profile');
+
+                    }
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+
+        // 📡 EVENT SYSTEM
+
+        setupEventListeners() {
+
+            document.getElementById('saveProfileBtn').addEventListener('click', () => {
+
+                this.saveProfile();
+
+            });
+
+
+
+            document.getElementById('profileNameInput').addEventListener('keypress', (e) => {
+
+                if (e.which === 13) this.saveProfile();
+
+            });
+
+
+
+            document.getElementById('profileNameInput').addEventListener('input', (e) => {
+
+                if (e.target.value.length > 16) {
+
+                    e.target.value = e.target.value.substring(0, 16);
+
+                }
+
+            });
+
+
+
+            // Auto-apply when typing in shareUrl
+
+            document.getElementById('shareUrl').addEventListener('input', (e) => {
+
+                if (!this.isUpdatingFromProfile) {
+
+                    const key = e.target.value.trim();
+
+                    if (key) {
+
+                        console.log('🔄 Key changed via input:', key);
+
+                        setTimeout(() => this.applyKeyToCalculator(key), 500);
+
+                    }
+
+                }
+
+            });
+
+
+
+            // Auto-apply on paste
+
+            document.getElementById('shareUrl').addEventListener('paste', (e) => {
+
+                setTimeout(() => {
+
+                    if (!this.isUpdatingFromProfile) {
+
+                        const key = document.getElementById('shareUrl').value.trim();
+
+                        if (key) {
+
+                            console.log('📋 Key pasted:', key);
+
+                            this.applyKeyToCalculator(key);
+
+                        }
+
+                    }
+
+                }, 100);
+
+            });
+
+
+
+            // Auto-apply on Enter
+
+            document.getElementById('shareUrl').addEventListener('keypress', (e) => {
+
+                if (e.which === 13 && !this.isUpdatingFromProfile) {
+
+                    const key = e.target.value.trim();
+
+                    if (key) {
+
+                        console.log('↵ Enter pressed:', key);
+
+                        this.applyKeyToCalculator(key);
+
+                        e.preventDefault();
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+
+        // 👀 MONITORING
+
+        startMonitoring() {
+
+            let lastKey = this.getCurrentKey();
+
+            
+
+            setInterval(() => {
+
+                if (this.isUpdatingFromProfile) return;
+
+                
+
+                const newKey = this.getCurrentKey();
+
+                if (newKey !== lastKey) {
+
+                    lastKey = newKey;
+
+                    this.highlightCurrentProfile();
+
+                    console.log('🔍 Key changed detected:', newKey);
+
+                }
+
+            }, 1000);
+
+        }
+
+
+
+        // 💾 STORAGE
+
+        saveToStorage() {
+
+            localStorage.setItem('runeProfiles', JSON.stringify(this.profiles));
+
+        }
+
+
+
+        loadProfiles() {
+
+            this.profiles = JSON.parse(localStorage.getItem('runeProfiles') || '{}');
+
+            this.renderProfilesList();
+
+        }
+
+    }
+
+
+
+    // Initialize
+
+    let runeProfilesManager;
+
+
+
+    function initializeProfilesManager() {
+
+        try {
+
+            const runesElement = document.getElementById('runes');
+
+            if (runesElement) {
+
+                const scope = angular.element(runesElement).scope();
+
+                if (scope && scope.fillRunes) {
+
+                    runeProfilesManager = new RuneProfilesManager();
+
+                    console.log('✅ Profiles Manager initialized successfully');
+
+                    return;
+
+                }
+
+            }
+
+            
+
+            // Retry after 1 second if Angular not ready
+
+            setTimeout(initializeProfilesManager, 1000);
+
+        } catch (error) {
+
+            console.log('Retrying initialization...');
+
+            setTimeout(initializeProfilesManager, 1000);
+
+        }
+
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        setTimeout(initializeProfilesManager, 500);
+
+    });
+
+
+
+    window.runeProfilesManager = runeProfilesManager;
+
+</script>
+</body>
+</html>

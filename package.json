@@ -1,0 +1,75 @@
+{
+  "name": "Runes_and_Masteries",
+  "version": "1.0.0",
+  "description": "Runes and Masteries",
+  "main": "main.js",
+  "author": "nickdoc",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-portable": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.nickdoc.runes_masteries",
+    "productName": "Runes and Masteries",
+    "copyright": "Copyright © 2025",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Runes and Masteries"
+    },
+    "extraResources": [
+      {
+        "from": ".",
+        "to": "app",
+        "filter": [
+          "**/*",
+          "!**/node_modules/**",
+          "!*.json",
+          "!dist",
+          "!build"
+        ]
+      }
+    ],
+    "compression": "maximum",
+    "asar": true,
+    "nodeGypRebuild": false,
+    "buildDependenciesFromSource": false
+  },
+  "devDependencies": {
+    "electron": "^22.3.27",
+    "electron-builder": "^24.6.4"
+  }
+}
